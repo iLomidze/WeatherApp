@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-//    var weatherData = [Weather]()
+//: - var weatherData = [Weather]()
     var weatherData = [
         "s",
         "ss",
@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     ]
     
     @IBOutlet weak var cityTable: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     
     
     
@@ -26,6 +28,9 @@ class ViewController: UIViewController {
 
         cityTable.delegate = self
         cityTable.dataSource = self
+        
+        // aqedan ar mushaobs, da ratom? - exla main storyboard-is inspectoridanaa gacentrili
+//        titleLabel.center.x = self.view.center.x
     
         let nib = UINib(nibName: "CityWeatherViewCell", bundle: nil)
         cityTable.register(nib, forCellReuseIdentifier: "CityWeatherViewCell")
@@ -52,10 +57,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let detailedInfo_vc = storyboard?.instantiateViewController(identifier: "detailedInfo_vc") as? DetailedInfoController else{
-            return
-        }
-        present(detailedInfo_vc, animated: true)
+//        guard let detailedInfo_vc = storyboard?.instantiateViewController(identifier: "detailedInfo_vc") as? DetailedInfoController else{
+//            return
+//        }
+//        present(detailedInfo_vc, animated: true)
+        performSegue(withIdentifier: "detailedInfo_segue", sender: nil)
     }
     
     
