@@ -64,11 +64,11 @@
 			children = (
 				E234B60125E63ADD001851E9 /* AppDelegate.swift */,
 				E234B60325E63ADD001851E9 /* SceneDelegate.swift */,
+				E234B60C25E63ADE001851E9 /* LaunchScreen.storyboard */,
+				E234B60725E63ADD001851E9 /* Main.storyboard */,
 				E234B60525E63ADD001851E9 /* ViewController.swift */,
 				E234B61B25E66B9D001851E9 /* DetailedInfoController.swift */,
-				E234B60725E63ADD001851E9 /* Main.storyboard */,
 				E234B60A25E63ADE001851E9 /* Assets.xcassets */,
-				E234B60C25E63ADE001851E9 /* LaunchScreen.storyboard */,
 				E234B60F25E63ADE001851E9 /* Info.plist */,
 				E234B61F25E6BC53001851E9 /* CityWeatherViewCell */,
 			);

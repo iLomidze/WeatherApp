@@ -154,10 +154,15 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="t1c-pY-vLv"/>
+                    <connections>
+                        <outlet property="cityLabel" destination="Rof-ft-sck" id="NrR-2A-vZm"/>
+                        <outlet property="imgCond" destination="aGP-rQ-dR4" id="koT-DJ-sTR"/>
+                        <outlet property="tempLabel" destination="tse-2b-Y9G" id="Orv-Ph-m1i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eMT-Le-5zj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1615" y="70"/>
+            <point key="canvasLocation" x="1687" y="69"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="I6f-Bh-261">
