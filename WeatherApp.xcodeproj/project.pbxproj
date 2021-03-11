@@ -16,6 +16,8 @@
 		E234B61825E63F8E001851E9 /* CityWeatherViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234B61625E63F8E001851E9 /* CityWeatherViewCell.swift */; };
 		E234B61925E63F8E001851E9 /* CityWeatherViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E234B61725E63F8E001851E9 /* CityWeatherViewCell.xib */; };
 		E234B61C25E66B9D001851E9 /* DetailedInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234B61B25E66B9D001851E9 /* DetailedInfoController.swift */; };
+		E234B6A425F80E52001851E9 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234B6A325F80E52001851E9 /* WeatherData.swift */; };
+		E234B6A725F81F12001851E9 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234B6A625F81F12001851E9 /* WeatherRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		E234B61625E63F8E001851E9 /* CityWeatherViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeatherViewCell.swift; sourceTree = "<group>"; };
 		E234B61725E63F8E001851E9 /* CityWeatherViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityWeatherViewCell.xib; sourceTree = "<group>"; };
 		E234B61B25E66B9D001851E9 /* DetailedInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInfoController.swift; sourceTree = "<group>"; };
+		E234B6A325F80E52001851E9 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		E234B6A625F81F12001851E9 /* WeatherRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 				E234B60725E63ADD001851E9 /* Main.storyboard */,
 				E234B60525E63ADD001851E9 /* ViewController.swift */,
 				E234B61B25E66B9D001851E9 /* DetailedInfoController.swift */,
+				E234B6A325F80E52001851E9 /* WeatherData.swift */,
+				E234B6A625F81F12001851E9 /* WeatherRequest.swift */,
 				E234B60A25E63ADE001851E9 /* Assets.xcassets */,
 				E234B60F25E63ADE001851E9 /* Info.plist */,
 				E234B61F25E6BC53001851E9 /* CityWeatherViewCell */,
@@ -159,6 +165,8 @@
 				E234B61825E63F8E001851E9 /* CityWeatherViewCell.swift in Sources */,
 				E234B60625E63ADD001851E9 /* ViewController.swift in Sources */,
 				E234B60225E63ADD001851E9 /* AppDelegate.swift in Sources */,
+				E234B6A425F80E52001851E9 /* WeatherData.swift in Sources */,
+				E234B6A725F81F12001851E9 /* WeatherRequest.swift in Sources */,
 				E234B60425E63ADD001851E9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

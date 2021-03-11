@@ -13,6 +13,7 @@ class DetailedInfoController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     
+    
     var city:String?
     var temp:Int?
     var cond:WeatherCond?
