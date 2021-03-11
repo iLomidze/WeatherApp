@@ -29,7 +29,7 @@ struct WeatherRequest {
     }
     
     // getWeather
-    func getWeather(completiton: @escaping(Result<Weather, WeatherError>)->Void) {
+    func getWeather(completiton: @escaping(Result<WeatherReq, WeatherError>)->Void) {
         let dataTask = URLSession.shared.dataTask(with: resourceURL){data,_,_ in
             guard let jsonData = data else{
                 completiton(.failure(.noDataAvailable))
@@ -38,7 +38,7 @@ struct WeatherRequest {
             
             do{
                 let decoder = JSONDecoder()
-                let weatherResponse = try decoder.decode(Weather.self, from: jsonData)
+                let weatherResponse = try decoder.decode(WeatherReq.self, from: jsonData)
                 completiton(.success(weatherResponse))
             } catch{
                 completiton(.failure(.cantProcessData))

@@ -9,12 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var sizeData:Int = 10
-    
-    
-//    var weatherData = Weather()
-    var weatherData:Weather?
-    
+    var weatherData:WeatherReq?
     
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -25,6 +20,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.navigationController!.title?.append("Forecast")
+        
         cityTable.delegate = self
         cityTable.dataSource = self
         
@@ -39,11 +36,13 @@ class ViewController: UIViewController {
                 print(error)
             case .success(let weather):
                 self?.weatherData = weather
-                self?.cityTable.reloadData()
+                
+                DispatchQueue.main.async {
+                    self?.cityTable.reloadData()
+                }
+                
             }
         }
-        
-//        cityTable.dequeueReusableCell(withIdentifier: "CityWeatherViewCell", for: )
         
     }
     
@@ -67,9 +66,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         // Old "dum" update
 //        cell.updateCell(city: weatherData[indexPath.row].city!, Temperature: weatherData[indexPath.row].temp!, Condition: weatherData[indexPath.row].condition!)
         
-        cell.updateCell(city: String(weatherData!.id), Temperature: 22, Condition: .sun)
-        cityTable.reloadData()
-    
+//        cell.updateCell(city: String(weatherData!.weather.first!.id), Temperature: (weatherData?.main.temp)!-273.15, Condition: .sun)
+        cell.updateCell(city: weatherData!.name, Temperature: (weatherData?.main.temp)!-273.15, Condition: .sun)
 
         return cell
     }
