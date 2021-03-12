@@ -9,19 +9,31 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var weatherData:WeatherReq?
     
     @IBOutlet weak var cityTable: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     
+    var cityName = ""
+    var weatherData = [WeatherReq](){
+        didSet{
+            DispatchQueue.main.async {
+                self.cityTable.reloadData()
+                
+                self.cityTable.beginUpdates()
+                self.cityTable.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+                self.cityTable.endUpdates()
+            }
+
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
 //        self.navigationController!.title?.append("Forecast")
         
+        searchBar.delegate = self
         cityTable.delegate = self
         cityTable.dataSource = self
         
@@ -29,46 +41,28 @@ class ViewController: UIViewController {
         cityTable.register(nib, forCellReuseIdentifier: "CityWeatherViewCell")
         
         
-        let weatherRequest = WeatherRequest(cityName: "Tbilisi")
-        weatherRequest.getWeather() { [weak self] result in
-            switch result{
-            case .failure(let error):
-                print(error)
-            case .success(let weather):
-                self?.weatherData = weather
-                
-                DispatchQueue.main.async {
-                    self?.cityTable.reloadData()
-                }
-                
-            }
-        }
-        
     }
     
 
 }
 
 //: ViewController Class Extension
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
+extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
     //: Create Empty TableView Cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // old
-//        weatherData.count
-        self.weatherData != nil ? 1 : 0
+        let numOfRows = weatherData.count
+        return numOfRows
     }
     
     //: Create Cell in TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cityTable.dequeueReusableCell(withIdentifier: "CityWeatherViewCell", for: indexPath) as! CityWeatherViewCell
         
-        // Old "dum" update
-//        cell.updateCell(city: weatherData[indexPath.row].city!, Temperature: weatherData[indexPath.row].temp!, Condition: weatherData[indexPath.row].condition!)
-        
-//        cell.updateCell(city: String(weatherData!.weather.first!.id), Temperature: (weatherData?.main.temp)!-273.15, Condition: .sun)
-        cell.updateCell(city: weatherData!.name, Temperature: (weatherData?.main.temp)!-273.15, Condition: .sun)
+//        if weatherData?.count ?? 0 > 0 {
+        cell.updateCell(city: weatherData[indexPath.row].name, Temperature: (weatherData[indexPath.row].main.temp)-273.15, Condition: .sun)
 
+//        }
         return cell
     }
     
@@ -84,6 +78,36 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
 //        }
 //        (segue.destination as? DetailedInfoController)?.updateView(city: weatherData[indexpath.row].city ?? "city", temperature: Int( weatherData[indexpath.row].temp ?? 0), condition: weatherData[indexpath.row].condition ?? WeatherCond.sun)
 //    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchBarText = searchBar.text else {
+            return
+        }
+        self.cityName = searchBarText
+        
+        requestData()
+        
+    }
+    
+    
+    func requestData(){
+        let weatherRequest = WeatherRequest(cityName: self.cityName)
+        weatherRequest.getWeather() { [weak self] result in
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let weather):
+                self?.weatherData.append(weather)
+//                DispatchQueue.main.async {
+//                    self?.cityTable.reloadData()
+//                }
+                
+            }
+        }
+    }
+    
+    
+    
 }
 
 

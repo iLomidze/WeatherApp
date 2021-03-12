@@ -16,50 +16,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-0P-F7G">
-                                <rect key="frame" x="0.0" y="130" width="667" height="245"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-0P-F7G">
+                                <rect key="frame" x="0.0" y="130" width="375" height="537"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.38374105679999998" green="0.68921245840000001" blue="0.84840754870000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forecast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="W0I-JZ-9yv">
-                                <rect key="frame" x="0.0" y="54" width="375" height="84"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="90"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact">
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="70"/>
-                                </variation>
-                            </label>
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="k0o-Bk-IKl">
+                                <rect key="frame" x="0.0" y="65" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.2901960784" green="0.6705882353" blue="0.96862745100000003" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="W0I-JZ-9yv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="6Lx-tu-hfF"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="HMp-K7-FXp"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HSQ-6a-836"/>
-                            <constraint firstItem="W0I-JZ-9yv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VIR-CH-Xqo"/>
+                            <constraint firstItem="k0o-Bk-IKl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="MYw-mO-Pwb"/>
+                            <constraint firstItem="k0o-Bk-IKl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d4v-mA-wfU"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="d7g-PO-QwN"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k9H-wI-fmY"/>
-                            <constraint firstItem="W0I-JZ-9yv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="kBX-xj-OhK"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nlg-CB-Kvo"/>
-                            <constraint firstItem="ZjK-0P-F7G" firstAttribute="top" secondItem="W0I-JZ-9yv" secondAttribute="bottom" constant="5" id="nsY-2D-ZfR"/>
-                            <constraint firstItem="W0I-JZ-9yv" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.15" id="wUG-Xy-mNz"/>
+                            <constraint firstItem="ZjK-0P-F7G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="86" id="okN-hE-cae"/>
+                            <constraint firstItem="k0o-Bk-IKl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="21" id="tcz-A9-oGM"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="wUG-Xy-mNz"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact">
-                            <mask key="constraints">
-                                <include reference="wUG-Xy-mNz"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="9XU-nq-qKW"/>
                     <connections>
                         <outlet property="cityTable" destination="ZjK-0P-F7G" id="wb7-Xd-15g"/>
-                        <outlet property="titleLabel" destination="W0I-JZ-9yv" id="3ON-ZI-TJw"/>
+                        <outlet property="searchBar" destination="k0o-Bk-IKl" id="i80-Ea-2Da"/>
                         <segue destination="gZP-4X-6af" kind="show" identifier="detailedInfo_segue" id="oHa-4B-DDA"/>
                     </connections>
                 </viewController>
