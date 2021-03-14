@@ -23,16 +23,26 @@ class CityWeatherViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateCell(city:String, Temperature temp:Double, Condition cond:WeatherCond) -> Void {
+    func updateCell(city:String, Temperature temp:Int, Condition cond:String) -> Void {
         cityNameLabel.text = city
         cityTemp.text = String(temp)
+    
+        
         switch cond {
-        case .cloud:
-            cityWeatherImg.image = UIImage(named: "cloud")
-        case .rain:
-            cityWeatherImg.image = UIImage(named: "rain")
-        default:
+        case "Clear":
             cityWeatherImg.image = UIImage(named: "sun")
+        case "Moon":
+            cityWeatherImg.image = UIImage(named: "moon")
+        case "Clouds":
+            cityWeatherImg.image = UIImage(named: "cloud")
+        case "Rain":
+            cityWeatherImg.image = UIImage(named: "rain")
+        case "Thunderstorm":
+            cityWeatherImg.image = UIImage(named: "thunderstorm")
+        case "Snow":
+            cityWeatherImg.image = UIImage(named: "snow")
+        default:
+            cityWeatherImg.image = UIImage(named: "mist")
         }
     }
     

@@ -20,7 +20,8 @@ struct WeatherRequest {
 
     init(cityName:String){
         
-        let resourceString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apiKEY)"
+        var resourceString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apiKEY)"
+        resourceString = resourceString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? resourceString
     
         guard let resourceURL = URL(string: resourceString) else {
             fatalError()
