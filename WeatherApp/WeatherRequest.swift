@@ -13,25 +13,25 @@ enum WeatherError:Error{
 }
 
 
-struct WeatherRequest {
-    let resourceURL:URL
+struct WeatherRequest{
+    var resourceURL:URL?
     let apiKEY = "b4fabebb89251b0e1dfa59900ad7423f"
     
 
-    init(cityName:String){
-        
-        var resourceString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apiKEY)"
-        resourceString = resourceString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? resourceString
-    
-        guard let resourceURL = URL(string: resourceString) else {
-            fatalError()
-        }
-        self.resourceURL = resourceURL
-    }
+//    init(cityName:String){
+//
+//        var resourceString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apiKEY)"
+//        resourceString = resourceString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? resourceString
+//
+//        guard let resourceURL = URL(string: resourceString) else {
+//            fatalError()
+//        }
+//        self.resourceURL = resourceURL
+//    }
     
     // getWeather
     func getWeather(completiton: @escaping(Result<WeatherReq, WeatherError>)->Void) {
-        let dataTask = URLSession.shared.dataTask(with: resourceURL){data,_,_ in
+        let dataTask = URLSession.shared.dataTask(with: resourceURL!){data,_,_ in
             guard let jsonData = data else{
                 completiton(.failure(.noDataAvailable))
                 return
@@ -47,6 +47,17 @@ struct WeatherRequest {
             
         }
         dataTask.resume()
+    }
+    
+    mutating func createURL(cityName:String){
+        var resourceString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apiKEY)"
+        resourceString = resourceString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? resourceString
+
+        guard let resourceURL = URL(string: resourceString) else {
+            fatalError()
+        }
+        self.resourceURL = resourceURL
+    
     }
     
 }

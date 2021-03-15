@@ -25,7 +25,7 @@ class CityWeatherViewCell: UITableViewCell {
     
     func updateCell(city:String, Temperature temp:Int, Condition cond:String) -> Void {
         cityNameLabel.text = city
-        cityTemp.text = String(temp)
+        cityTemp.text = "\(temp) C"
     
         
         switch cond {

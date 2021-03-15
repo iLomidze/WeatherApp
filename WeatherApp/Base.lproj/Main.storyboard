@@ -22,9 +22,17 @@
                                 <color key="sectionIndexBackgroundColor" red="0.38374105679999998" green="0.68921245840000001" blue="0.84840754870000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="k0o-Bk-IKl">
-                                <rect key="frame" x="0.0" y="109" width="366" height="56"/>
+                                <rect key="frame" x="0.0" y="109" width="390" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="91e-WF-8uh">
+                                <rect key="frame" x="145" y="372" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="1o6-dA-f6e"/>
+                                    <constraint firstAttribute="width" constant="100" id="AXk-DH-ogk"/>
+                                </constraints>
+                                <color key="color" red="0.2156862745" green="0.50196078430000002" blue="0.72941176470000002" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -32,11 +40,13 @@
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="HMp-K7-FXp"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HSQ-6a-836"/>
                             <constraint firstItem="k0o-Bk-IKl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="MYw-mO-Pwb"/>
+                            <constraint firstItem="91e-WF-8uh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aG5-Cm-3dB"/>
                             <constraint firstItem="k0o-Bk-IKl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d4v-mA-wfU"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="d7g-PO-QwN"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k9H-wI-fmY"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nlg-CB-Kvo"/>
                             <constraint firstItem="ZjK-0P-F7G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="86" id="okN-hE-cae"/>
+                            <constraint firstItem="91e-WF-8uh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qRz-TL-OgX"/>
                             <constraint firstItem="k0o-Bk-IKl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="21" id="tcz-A9-oGM"/>
                         </constraints>
                     </view>
@@ -44,6 +54,7 @@
                     <connections>
                         <outlet property="cityTable" destination="ZjK-0P-F7G" id="wb7-Xd-15g"/>
                         <outlet property="searchBar" destination="k0o-Bk-IKl" id="i80-Ea-2Da"/>
+                        <outlet property="spinner" destination="91e-WF-8uh" id="DTk-sy-nhs"/>
                         <segue destination="gZP-4X-6af" kind="show" identifier="detailedInfo_segue" id="oHa-4B-DDA"/>
                     </connections>
                 </viewController>

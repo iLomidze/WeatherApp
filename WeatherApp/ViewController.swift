@@ -12,15 +12,22 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var cityTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    let defaults = UserDefaults.standard
     
     var cityName = ""
+    var cityNamesArr = [String]()
     var weatherData = [WeatherReq](){
         didSet{
             DispatchQueue.main.async {
                 self.cityTable.reloadData()
                 self.searchBar.endEditing(true)
                 self.searchBar.text = ""
+                
+                self.view.isUserInteractionEnabled = true
+                self.spinner.stopAnimating()
+                self.defaultsUpdate()
             }
         }
     }
@@ -30,20 +37,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = "Forecast"
-
+        
         searchBar.delegate = self
         cityTable.delegate = self
         cityTable.dataSource = self
+        
+        spinner.hidesWhenStopped = true
 
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(view.endEditing))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         
         self.cityTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         let nib = UINib(nibName: "CityWeatherViewCell", bundle: nil)
         cityTable.register(nib, forCellReuseIdentifier: "CityWeatherViewCell")
-    
+        
+        defaultsLoad()
     }
     
     
@@ -86,6 +96,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBa
     }
     
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete){
+            weatherData.remove(at: indexPath.row)
+            cityNamesArr.remove(at: indexPath.row)
+            self.cityTable.reloadData()
+        }
+    }
+    
+    
     //: Update ViewController for destination segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = cityTable.indexPathForSelectedRow else{
@@ -113,65 +136,91 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBa
             return
         }
         
+
+        
         self.cityName = searchBarText
         
-        requestData()
+        if(isAdded(city: cityName)){
+            DispatchQueue.main.async {
+                self.showAlert(show: self.cityName)
+                return
+            }
+            self.searchBar.text = ""
+            return
+        }
+
+        cityNamesArr.append(self.cityName)
+        
+        self.view.isUserInteractionEnabled = false
+        self.spinner.startAnimating()
+        
+        requestData(cityName: self.cityName)
     }
     
     
-    
-    
-    
-    func requestData(){
-        let weatherRequest = WeatherRequest(cityName: self.cityName)
+    func requestData(cityName:String){
+        
+        var weatherRequest = WeatherRequest()
+        weatherRequest.createURL(cityName: cityName)
         weatherRequest.getWeather() { [weak self] result in
             switch result{
             case .failure(let error):
                 print(error)
             case .success(let weather):
-                self?.weatherData.append(weather)
-//                DispatchQueue.main.async {
-//                    self?.cityTable.reloadData()
-//                }
-                
+//                self?.weatherData.append(weather)
+                self?.weatherData.insert(weather, at: 0)
             }
         }
     }
     
     
-    
-}
-
-
-
-
-
-//: Test Data preparation ->
-
-enum WeatherCond:CaseIterable {
-    case sun, rain, cloud, snow
-}
-
-//: - Weather Structure
-struct WeatherTest {
-    var city:String?
-    var temp:Double?
-    var condition:WeatherCond?
-}
-
-//: - Creates Array of test weather data
-func createTestData(dataSize:Int) -> [WeatherTest] {
-    var weatherData:[WeatherTest] = []
-    
-    for i in 0..<dataSize {
-        var singleData:WeatherTest = WeatherTest()
-        singleData.city = "city \(i)"
-        singleData.temp = round(Double(Float.random(in: -10..<50)))
-        singleData.condition = WeatherCond.allCases.randomElement()
-        
-        weatherData.append(singleData)
+    func isAdded(city:String) -> Bool {
+        for info in weatherData {
+            let addedCity = info.name
+            if addedCity == city{
+                return true
+            }
+        }
+        return false
     }
-    return weatherData
+    
+    
+    @objc func hideKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    
+    func showAlert(show message:String){
+        let alert = UIAlertController(title: "Can't Add City", message: "This city has already been added", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func defaultsUpdate(){
+        self.defaults.set(self.cityNamesArr, forKey: "cityNamesArr")
+    }
+    
+    
+    func defaultsLoad(){
+        self.spinner.startAnimating()
+        self.view.isUserInteractionEnabled = false
+        
+        self.cityNamesArr = self.defaults.object(forKey: "cityNamesArr") as? [String] ?? [String]()
+        
+        for cityName_i in self.cityNamesArr {
+            requestData(cityName: cityName_i)
+        }
+        
+        self.cityTable.reloadData()
+        
+        self.spinner.stopAnimating()
+        self.view.isUserInteractionEnabled = true
+    }
+    
+    
 }
+
+
 
 

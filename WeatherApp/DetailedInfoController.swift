@@ -35,7 +35,7 @@ class DetailedInfoController: UIViewController {
         tempLabel.text = "\(String(temp ?? 0)) C"
         tempFeelLabel.text = "\(String(tempFeel ?? 0)) C"
         windSpeedLabel.text = "\(String(windSpeed ?? 0)) m/s"
-        pressureLabel.text = "\(String(pressure ?? 1000)) Bar"
+        pressureLabel.text = "\(String(pressure ?? 1000)) hPa"
         lonLabel.text = "\(String(longitude ?? 0))"
         latLabel.text = "\(String(latitude ?? 0))"
         
