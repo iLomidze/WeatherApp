@@ -166,8 +166,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBa
             switch result{
             case .failure(let error):
                 print(error)
+                DispatchQueue.main.async {
+                    self?.showAlert(show: "\(error.localizedDescription)")
+                    self?.cityNamesArr.remove(at: (self?.cityNamesArr.count)!-1)
+                }
+
             case .success(let weather):
 //                self?.weatherData.append(weather)
+                
                 self?.weatherData.insert(weather, at: 0)
             }
         }
@@ -193,6 +199,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBa
     func showAlert(show message:String){
         let alert = UIAlertController(title: "Can't Add City", message: "This city has already been added", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        DispatchQueue.main.async {
+            self.view.isUserInteractionEnabled = true
+            self.spinner.stopAnimating()
+        }
         present(alert, animated: true, completion: nil)
     }
     
